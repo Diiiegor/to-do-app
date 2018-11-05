@@ -32,6 +32,13 @@ const crear = (descripcion) => {
     return porHacer
 };
 
+//trae el listado de elementos del archivo .json
+const getListado=()=>{
+    cargarDB();
+    return listadoPorHcer;
+};
+
 module.exports = {
-    crear
+    crear,
+    getListado
 };
