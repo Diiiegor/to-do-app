@@ -12,12 +12,12 @@ const guardarDB = () => {
 
 };
 
-const cargarDB=()=>{
-    try{
-        listadoPorHcer=require('../db/data.json');
+const cargarDB = () => {
+    try {
+        listadoPorHcer = require('../db/data.json');
     }
     catch (e) {
-        listadoPorHcer=[];
+        listadoPorHcer = [];
     }
 };
 
@@ -33,20 +33,20 @@ const crear = (descripcion) => {
 };
 
 //trae el listado de elementos del archivo .json
-const getListado=()=>{
+const getListado = () => {
     cargarDB();
     return listadoPorHcer;
 };
 
 //actualiza la tarea
-const actualizar=(descripcion,completado=true)=>{
+const actualizar = (descripcion, completado = true) => {
     cargarDB();
 
     //buscamos el index de la tarea que tenga la descripcion ingresada, la funcion findindex retorna -1 en caso de no encontrar nongun elemento
-    let index=listadoPorHcer.findIndex(tarea=>tarea.descripcion===descripcion);
+    let index = listadoPorHcer.findIndex(tarea => tarea.descripcion === descripcion);
 
-    if (index >= 0){
-        listadoPorHcer[index].completado=completado;
+    if (index >= 0) {
+        listadoPorHcer[index].completado = completado;
         guardarDB();
         return true;
     }
@@ -55,8 +55,25 @@ const actualizar=(descripcion,completado=true)=>{
     }
 };
 
+const borrar = (descripcion) => {
+    cargarDB();
+
+    let nuevoArreglo = listadoPorHcer.filter(tarea => tarea.descripcion !== descripcion);
+
+    if (nuevoArreglo.length === listadoPorHcer.length) {
+        return false;
+    }
+    else {
+        listadoPorHcer = nuevoArreglo;
+        guardarDB();
+        return true;
+    }
+
+};
+
 module.exports = {
     crear,
     getListado,
-    actualizar
+    actualizar,
+    borrar
 };
