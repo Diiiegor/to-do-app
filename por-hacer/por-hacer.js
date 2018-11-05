@@ -3,7 +3,7 @@ const fs = require('fs');
 let listadoPorHcer = [];
 
 const guardarDB = () => {
-    cargarDB();
+    //cargarDB();
     let data = JSON.stringify(listadoPorHcer);
     //escribimos la tabla del 2 en un archivo externo
     fs.writeFile(`db/data.json`, data, (err) => {
