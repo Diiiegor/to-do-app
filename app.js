@@ -1,6 +1,6 @@
 const argv = require('./config/yargs').argv;
 const colors = require('colors');
-const {crear,getListado}=require('./por-hacer/por-hacer');
+const {crear,getListado,actualizar}=require('./por-hacer/por-hacer');
 
 let comando = argv._[0];
 
@@ -21,7 +21,8 @@ switch (comando) {
 
         break;
     case 'actualizar':
-        console.log("Actualizar tarea tarea");
+        let actualizado=actualizar(argv.descripcion,argv.completado);
+        console.log(actualizado);
         break;
     default:
         console.log("EL comando no es reconocido");

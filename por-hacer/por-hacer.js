@@ -38,7 +38,25 @@ const getListado=()=>{
     return listadoPorHcer;
 };
 
+//actualiza la tarea
+const actualizar=(descripcion,completado=true)=>{
+    cargarDB();
+
+    //buscamos el index de la tarea que tenga la descripcion ingresada, la funcion findindex retorna -1 en caso de no encontrar nongun elemento
+    let index=listadoPorHcer.findIndex(tarea=>tarea.descripcion===descripcion);
+
+    if (index >= 0){
+        listadoPorHcer[index].completado=completado;
+        guardarDB();
+        return true;
+    }
+    else {
+        return false;
+    }
+};
+
 module.exports = {
     crear,
-    getListado
+    getListado,
+    actualizar
 };
